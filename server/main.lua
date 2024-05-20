@@ -1,15 +1,19 @@
 local QBCore = exports['qb-core']:GetCoreObject() 
 
-lib.callback.register('gg-drivingschool:Payqb', function()
-	local src = source
+lib.callback.register('gg-drivingschool:payment', function(source)
+    local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
-	local bankamount = xPlayer.PlayerData.money["bank"]
-	local amount = Config.TestCost
+    local bankamount = xPlayer.PlayerData.money["bank"]
+    local amount = Config.TestCost
 
-	if bankamount >= amount then
-		xPlayer.Functions.RemoveMoney('bank', Config.TestCost)
-	end
+    if bankamount >= amount then
+        xPlayer.Functions.RemoveMoney('bank', Config.TestCost)
+        TriggerClientEvent('gg-drivingschool:paymentSuccess', src)
+    else
+        TriggerClientEvent('QBCore:Notify', src, "Not enough money", "error")
+    end
 end)
+
 
 lib.callback.register('gg-drivingschool:server:GetLicense', function()
     local src = source

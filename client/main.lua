@@ -109,23 +109,26 @@ CreateThread(function()
 end)
 
 RegisterNetEvent('drivingtest:start', function()
-	local hasItem = false
+    local hasItem = false
 
-	if Config.Inventory == 'ox' then
-		local count = exports.ox_inventory:Search('count', 'driver_license')
-		hasItem = count >= 1
-	elseif Config.Inventory == 'qb' then
-		hasItem = QBCore.Functions.HasItem('driver_license')
-	end
+    if Config.Inventory == 'ox' then
+        local count = exports.ox_inventory:Search('count', 'driver_license')
+        hasItem = count >= 1
+    elseif Config.Inventory == 'qb' then
+        hasItem = QBCore.Functions.HasItem('driver_license')
+    end
 
-	if hasItem then
-		QBCore.Functions.Notify("You Already have License!", "error")
-	else
-		QBCore.Functions.Notify("You cannot close screen until and unless you give theory test", "error")
-		lib.callback.await('gg-drivingschool:Payqb')
-		StartTheoryTest()
-	end
+    if hasItem then
+        QBCore.Functions.Notify("You already have a license!", "error")
+    else
+        lib.callback.await('gg-drivingschool:payment')
+    end
 end)
+
+RegisterNetEvent('gg-drivingschool:paymentSuccess', function()
+    StartTheoryTest()
+end)
+
 
 -- Drive test checkpoints and completion
 CreateThread(function()
