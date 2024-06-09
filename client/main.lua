@@ -31,7 +31,13 @@ function StartDriveTest()
 	QBCore.Functions.SpawnVehicle(Config.Vehicles, function(vehicle)
 		SetVehicleNumberPlateText(vehicle, plate)
 		SetEntityHeading(vehicle, coords.h)
-		exports[Config.FuelScript]:SetFuel(vehicle, 100.0)
+
+		if Config.FuelScript == 'ox_fuel' then
+			Entity(vehicle).state.fuel = 100 -- Don't change this. Change it in the  Defaults to ox fuel if not set in the config
+		else
+			exports[Config.FuelScript]:SetFuel(vehicle, 100.0)
+		end
+
 		TaskWarpPedIntoVehicle(PlayerPedId(), vehicle, -1)
 		TriggerEvent("vehiclekeys:client:SetOwner", QBCore.Functions.GetPlate(vehicle))
 		SetVehicleCustomPrimaryColour(vehicle, 0, 0, 0)
@@ -216,7 +222,7 @@ end)
 
 CreateThread(function()
 	-- Starter Ped
-	local startmodel = `csb_chef`
+	local startmodel = `cs_priest`
 	RequestModel(startmodel)
 	while not HasModelLoaded(startmodel) do Wait(10) end
 	local START_PED = CreatePed(0, startmodel, Config.startingped.x, Config.startingped.y, Config.startingped.z-1.0, Config.startingped.w, false, false)

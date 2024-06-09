@@ -3,8 +3,8 @@ local QBCore = exports['qb-core']:GetCoreObject()
 Config = {}
 
 Config.Framework = 'qb-core'    -- your framework name here
-Config.Inventory = 'qb'         -- your inventory script here 'qb' - for 'qb-inventory' | 'ox' - for'ox_inventory'
-Config.Target = 'qb'            -- your target script name here 'qb' - for 'qb-target' | 'ox' - for 'ox_target' | 'interact' for world interaction
+Config.Inventory = 'ox'         -- your inventory script here 'qb' - for 'qb-inventory' | 'ox' - for'ox_inventory'
+Config.Target = 'ox'            -- your target script name here 'qb' - for 'qb-target' | 'ox' - for 'ox_target' | 'interact' for world interaction
 
 Config.startingped = vector4(240.38, -1379.77, 33.74, 140.28)
 Config.MaxErrors       = 5
@@ -17,7 +17,7 @@ Config.SpeedLimits = {
 }
 
 Config.Vehicles = 'blista'
-Config.FuelScript = 'LegacyFuel'
+Config.FuelScript = 'ox_fuel'
 Config.TestCost = 1000
 
 Config.Zones = {
